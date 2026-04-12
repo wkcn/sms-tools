@@ -68,6 +68,6 @@ def suppressFreqDFTmodel(x, fs, N):
     ti = int(np.floor(threshold * N / fs)) + 1
     mX_filt = mX.copy() 
     mX_filt[:ti] = -120  # frequencies <= 70 Hz to -120dB
-    y = dftSynth(mX, pX, M) / outputScaleFactor
-    yfilt = dftSynth(mX_filt, pX, M) / outputScaleFactor
+    y = dftSynth(mX, pX, M) * outputScaleFactor
+    yfilt = dftSynth(mX_filt, pX, M) * outputScaleFactor
     return y, yfilt
