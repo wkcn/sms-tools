@@ -64,7 +64,19 @@ def optimalZeropad(x, fs, f):
     hM2 = M // 2
     dft_buf = np.concatenate((x[hM2:], np.zeros(pad), x[:hM2]))
 
+    # the following is right too, but the phase is not zero
+    # dft_buf = np.concatenate((x, np.zeros(pad)))
+
     X = fft(dft_buf)
+    if False:
+        # visualize the phase
+        import matplotlib.pyplot as plt
+        fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+        ax1.plot(x)
+        ax2.plot(dft_buf)
+        ax3.plot(np.unwrap(np.angle(X)))
+        plt.show()
+
     X = X[:N // 2 + 1]
     mX = 20 * np.log10(abs(X))
     return mX
