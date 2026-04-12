@@ -55,6 +55,8 @@ def zpFFTsizeExpt(x, fs):
     The first few lines of the code to generate xseg and the windows have been written for you, 
     please use it and do not modify it. 
     """
+
+    fs = int(fs)
     
     M = len(x) // 2
     xseg = x[:M]

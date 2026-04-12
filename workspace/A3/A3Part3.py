@@ -50,7 +50,7 @@ def testRealEven(x):
     """
     M = len(x)
     # N = 2 ** int(np.ceil(np.log2(M)))
-    # do a zero phase windowing of xwithout any zero-padding
+    # do a zero phase windowing of x without any zero-padding
     N = M
     pad = N - M
     hM2 = M // 2
@@ -58,7 +58,8 @@ def testRealEven(x):
     X = fft(dft_buf)
 
     RX, IX = X.real, X.imag
-    r_is_even = (RX[1:]==RX[-1:0:-1]).all()
-    i_is_zero = (IX == 0).all()
+    eps = 1e-6
+    r_is_even = (np.abs(RX[1:] - RX[-1:0:-1]) < eps).all()
+    i_is_zero = (np.abs(IX) < eps).all()
     isRealEven = bool(r_is_even and i_is_zero)
     return isRealEven, dft_buf, X

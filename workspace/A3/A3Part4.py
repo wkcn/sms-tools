@@ -58,6 +58,7 @@ def suppressFreqDFTmodel(x, fs, N):
         yfilt (numpy array) = Output of the dftSynth() with filtering (M samples long)
     The first few lines of the code have been written for you, do not modify it. 
     """
+    fs = int(fs)
     M = len(x)
     w = get_window('hamming', M)
     outputScaleFactor = sum(w)
@@ -65,9 +66,9 @@ def suppressFreqDFTmodel(x, fs, N):
     ## Your code here
     mX, pX = dftAnal(x, w, N)
     threshold = 70  # Hz
-    ti = int(np.floor(threshold * N / fs)) + 1
+    ti = int(np.ceil(threshold * N / fs))
     mX_filt = mX.copy() 
-    mX_filt[:ti] = -120  # frequencies <= 70 Hz to -120dB
+    mX_filt[:ti + 1] = -120  # frequencies <= 70 Hz to -120dB
     y = dftSynth(mX, pX, M) * outputScaleFactor
     yfilt = dftSynth(mX_filt, pX, M) * outputScaleFactor
     return y, yfilt

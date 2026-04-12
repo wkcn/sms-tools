@@ -55,6 +55,7 @@ def optimalZeropad(x, fs, f):
         mX (numpy array) = The positive half of the DFT spectrum of the N point DFT after zero-padding 
                         x appropriately (zero-padding length to be computed). mX is (N/2)+1 samples long
     """
+    fs, f = int(fs), int(f)
     M = len(x)
     g = np.gcd(f, fs)
     z = fs // g

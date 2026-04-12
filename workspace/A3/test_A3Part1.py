@@ -31,5 +31,5 @@ def test(fs, f1, f2):
 
     plt.show()
 
-test(fs=10000, f1=80, f2=200)
-test(fs=48000, f1=300, f2=800)
+test(fs=10000., f1=80., f2=200.)
+test(fs=48000., f1=300., f2=800.)

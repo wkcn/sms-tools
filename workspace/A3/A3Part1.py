@@ -59,6 +59,7 @@ def minimizeEnergySpreadDFT(x, fs, f1, f2):
         mX (numpy array) = The positive half of the DFT spectrum (in dB) of the M sample segment of x. 
                            mX is (M/2)+1 samples long (M is to be computed)
     """
+    fs, f1, f2 = int(fs), int(f1), int(f2)
     M = np.lcm(fs // np.gcd(f1, fs), fs // np.gcd(f2, fs))
     sx = x[:M]
     hM2 = M // 2
