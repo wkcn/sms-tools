@@ -83,8 +83,9 @@ def computeEngEnv(inputFile, window, M, N, H):
     
     ### your code here
     fs, x = UF.wavread(inputFile)
-    w = get_window(window, M)
+    w = get_window(window, M, M % 2 == 0)
     mX, pX = stft.stftAnal(x, w, N, H)
+    mX = 10 ** (mX / 20)
 
     def compute_slice(low_freq, high_freq, fs, N):
         # return [left, right)
@@ -94,7 +95,7 @@ def computeEngEnv(inputFile, window, M, N, H):
         right = int(np.ceil(high_freq / e))
         return slice(left, right)
 
-    f_E = lambda x: 10 * np.log10((x ** 2).sum(axis=1) + eps)
+    f_E = lambda x: 10 * np.log10((x ** 2).sum(axis=1))
 
     E0 = f_E(mX[:, compute_slice(0, 3000, fs, N)])
     E1 = f_E(mX[:, compute_slice(3000, 10000, fs, N)])

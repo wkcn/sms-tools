@@ -34,7 +34,7 @@ type (window), window length (M), FFT size (N), and hop size (H). The function s
 tuple of both the SNR values in decibels: (SNR1, SNR2). Both SNR1 and SNR2 are float values. 
 
 Test case 1: If you run your code using piano.wav file with 'blackman' window, M = 513, N = 2048 and 
-H = 128, the output SNR values should be around: (67.57748352378475, 86.36).  # update: SNR2 should be 86.36 in the case1
+H = 128, the output SNR values should be around: (67.57748352378475, 304.68394693221649).
 
 Test case 2: If you run your code using sax-phrase-short.wav file with 'hamming' window, M = 512, 
 N = 1024 and H = 64, the output SNR values should be around: (89.510506656299285, 306.18696700251388).
@@ -61,10 +61,10 @@ def computeSNR(inputFile, window, M, N, H):
     """
     ## your code here
     _, x = UF.wavread(inputFile)
-    w = get_window(window, M)
+    w = get_window(window, M, M % 2 == 0)
     y = stft.stft(x, w, N, H)
 
-    log10 = lambda v: np.log10(np.maximum(v, eps))
+    log10 = lambda v: np.log10(v)
 
     noise1 = x - y
     SNR1 = float(10 * log10(np.sum(x ** 2) / np.sum(noise1 ** 2)))

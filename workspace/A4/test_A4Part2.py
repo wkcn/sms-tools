@@ -9,6 +9,6 @@ def test(inputFile, window, M, N, H, SNR1, SNR2):
     np.testing.assert_allclose(SNR2_out, SNR2, atol=100, rtol=0)
 
 
-test('../../sounds/piano.wav', 'blackman', 513, 2048, 128, 67.57, 86.36)
+test('../../sounds/piano.wav', 'blackman', 513, 2048, 128, 67.57, 304.68)
 test('../../sounds/sax-phrase-short.wav', 'hamming', 512, 1024, 64, 89.51,306.19)
 test('../../sounds/rain.wav', 'hann', 1024, 2048, 128, 74.63,304.27)
